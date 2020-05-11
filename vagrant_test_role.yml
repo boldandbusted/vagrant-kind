@@ -1,0 +1,10 @@
+# Usage:
+# $ vagrant init
+# $ 
+
+- hosts: all
+  name: Test a specifc role
+  remote_user: "{{ admin_user }}"
+  become: yes
+  roles:
+  - role: "{{ var_role }}"
