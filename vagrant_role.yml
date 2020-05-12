@@ -1,0 +1,23 @@
+# Usage:
+# $ vagrant init
+# $ 
+
+- hosts: all
+  name: Test a specifc role
+  remote_user: "{{ admin_user }}"
+  become: yes
+  vars:
+    go_install_os_dependencies: true
+    go_install_dir: /usr/local/bin
+    go_projects_dir: /opt/go/projects
+    go_configure_goenv: false
+    docker_users:
+      - vagrant
+      - ubuntu
+    kind_install_dir: /usr/local/bin/
+  roles:
+    - role: "docker"
+    - role: "golang"
+    - role: "kubectl"
+    - role: "kind"
+#  - role: "{{ var_role }}"

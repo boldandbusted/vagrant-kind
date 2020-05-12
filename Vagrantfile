@@ -28,9 +28,9 @@ Vagrant.configure(2) do |config|
       node.vm.provision 'ansible_local' do |ansible|
         ansible.install = true
         ansible.playbook = 'vagrant_role.yml'
-        ansible.verbose = "vvvv"
+        #ansible.verbose = "vvvv"
         ansible.extra_vars = {
-          var_role: 'kind'
+          admin_user: 'ubuntu'
         }
       end
     end
@@ -79,7 +79,7 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
     vb.memory = "2047"
-    vb.cpu = "2"
+    vb.cpus = "2"
   end
 
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies

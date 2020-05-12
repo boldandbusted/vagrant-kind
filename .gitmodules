@@ -1,3 +1,12 @@
 [submodule "roles/kind"]
 	path = roles/kind
 	url = https://github.com/PyratLabs/ansible-role-kind.git
+[submodule "roles/docker"]
+	path = roles/docker
+	url = https://github.com/geerlingguy/ansible-role-docker.git
+[submodule "roles/golang"]
+	path = roles/golang
+	url = https://github.com/PyratLabs/ansible-role-go.git
+[submodule "roles/kubectl"]
+	path = roles/kubectl
+	url = https://github.com/andrewrothstein/ansible-kubectl.git
