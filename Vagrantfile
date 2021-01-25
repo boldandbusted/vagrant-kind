@@ -42,23 +42,25 @@ Vagrant.configure(2) do |config|
 
       # SSH forwarding so that we can access Github as our selves
       node.ssh.forward_agent = true
-      node.vm.synced_folder ".", "/vagrant"
+      node.vm.synced_folder ".", "/vagrant", type: "rsync"
       node.disksize.size = "50GB"
 
       node.vm.provision 'shell' do |shell|
         content = %(
         apt-get update
         apt-get dist-upgrade -y
-        apt-get install bash-completion
+        apt-get install bash-completion python-is-python3 python-dev-is-python3 python3-pip -y
+        update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+        pip install ansible
         )
         shell.inline = content
         shell.reboot = true
       end
 
       node.vm.provision 'ansible_local' do |ansible|
-        ansible.install = true
+        ansible.install = false
         ansible.playbook = 'vagrant_role.yml'
-        ansible.install_mode = "pip"
+        #ansible.install_mode = "pip"
         #ansible.verbose = "vvvv"
         ansible.extra_vars = {
           admin_user: 'ubuntu'
