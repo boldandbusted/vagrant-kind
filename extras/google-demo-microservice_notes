@@ -1,0 +1,17 @@
+# Inside the VM:
+vagrant ssh 
+curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/v1.10.1/skaffold-linux-amd64 && chmod +x skaffold && sudo mv skaffold /usr/local/bin
+git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
+kind create cluster --config=- <<EOF
+# three node (two workers) cluster config
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: worker
+- role: worker
+- role: worker
+- role: worker
+- role: worker
+- role: worker
+EOF
