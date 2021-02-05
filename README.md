@@ -9,7 +9,7 @@ Keep your main desktop OS clean when playing with Kubernetes, with [Vagrant](htt
 ## Quickstart
 
 ```shell
-git clone --recurse-submodules vagrant-kind
+git clone --recurse-submodules <THIS REPO URI> vagrant-kind
 cd vagrant-kind
 vagrant up
 vagrant ssh
