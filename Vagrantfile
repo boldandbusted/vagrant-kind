@@ -16,7 +16,7 @@ Vagrant.configure(2) do |config|
 
       node.vm.provider :hyperv do |hv|
         node.vm.box = 'bento/ubuntu-20.04'
-        hv.memory = '4096'
+        hv.memory = '8192'
         hv.cpus = '2'
         hv.vmname = hostname
         hv.vm_integration_services = {
@@ -36,7 +36,7 @@ Vagrant.configure(2) do |config|
           ]
         end
         # vb.gui = true
-        vb.memory = '4096'
+        vb.memory = '8192'
         vb.cpus = '2'
       end
 
