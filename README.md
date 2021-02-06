@@ -28,4 +28,3 @@ Thank you to:
 * HashiCorp for making Vagrant
 * And thanks to the devs behind [KinD](https://kind.sigs.k8s.io/)!
 
-
