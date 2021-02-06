@@ -16,14 +16,16 @@ vagrant ssh
 kind create cluster
 ```
 
+# Ideas 
 Need ideas for what to do with this cluster? Check out KIND's [resources](https://kind.sigs.k8s.io/docs/user/resources/).
 
 Also, browse through the [ArtifactHub](https://artifacthub.io/).
 
-Thank you to the authors of the Ansible roles I've integrated as git submodules in roles/.
+# Thanks!
 
-Thank you to HashiCorp for making Vagrant, and for creating the 'ansible_local' Vagrant provisioner.
-
-And thanks to the devs behind [KinD](https://kind.sigs.k8s.io/)!
+Thank you to:
+* the authors of the Ansible roles I've integrated as git submodules in roles/.
+* HashiCorp for making Vagrant
+* And thanks to the devs behind [KinD](https://kind.sigs.k8s.io/)!
 
 
