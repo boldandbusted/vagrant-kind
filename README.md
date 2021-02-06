@@ -19,12 +19,14 @@ kind create cluster
 
 ## Tips
 
-To expose K8s ports properly to the Host OS, be sure to add `--address 0.0.0.0` to relevant networking kubectl commands.
+### Host OS access
+To expose K8s ports properly to the Host OS, be sure to add `--address 0.0.0.0` to relevant networking kubectl commands. Example:
 
 ```
 kubectl port-forward -n kubernetes-dashboard service/dashboard-kubernetes-dashboard 8080:443 --address=0.0.0.0 &
 ```
 
+### FQDN to reach cluster
 `vagrant-dns` plugin users can use the hostname "kind.test" to reach ports exposed. Others will need to use the IP "192.168.34.10".
 
 # Ideas 
