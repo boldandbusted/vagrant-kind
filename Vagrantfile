@@ -40,7 +40,7 @@ Vagrant.configure(2) do |config|
         vb.cpus = '2'
       end
 
-      # SSH forwarding so that we can access Github as our selves
+      # SSH forwarding so that we can access Github as ourselves
       node.ssh.forward_agent = true
       node.vm.synced_folder ".", "/vagrant", type: "rsync"
       node.disksize.size = "50GB"
@@ -59,6 +59,7 @@ Vagrant.configure(2) do |config|
 
       node.vm.provision 'ansible_local' do |ansible|
         ansible.install = false
+        ansible.compatibility_mode = "2.0"
         ansible.playbook = 'vagrant_role.yml'
         #ansible.install_mode = "pip"
         #ansible.verbose = "vvvv"

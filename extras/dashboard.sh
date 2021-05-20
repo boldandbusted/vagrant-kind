@@ -21,14 +21,19 @@ echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt
 sudo apt-get update
 sudo apt-get install helm
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
-helm install dashboard kubernetes-dashboard/kubernetes-dashboard -n kubernetes-dashboard --create-namespace
+helm install --atomic dashboard kubernetes-dashboard/kubernetes-dashboard -n kubernetes-dashboard --create-namespace
 kubectl get all -n kubernetes-dashboard -o wide
+
 # See also:
 # https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
 # https://github.com/kubernetes-sigs/metrics-server
 # https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
 # https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md
 # Note that none of these are the same...
+
+# Wait until the pod is ready
+
+kubectl wait --for=condition=ready pod -l  app.kubernetes.io/name=kubernetes-dashboard -n kubernetes-dashboard
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: ServiceAccount
