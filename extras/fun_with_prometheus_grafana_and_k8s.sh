@@ -1,8 +1,8 @@
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
-helm install --atomic my-metrics-server bitnami/metrics-server --version 5.3.5
+helm install --atomic my-metrics-server bitnami/metrics-server --version 5.9.2
 helm upgrade --atomic my-metrics-server bitnami/metrics-server --set apiService.create=true
-helm install --atomic my-kube-state-metrics bitnami/kube-state-metrics --version 1.1.6
+helm install --atomic my-kube-state-metrics bitnami/kube-state-metrics --version 2.1.1
 helm repo update
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
