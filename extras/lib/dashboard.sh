@@ -61,7 +61,7 @@ subjects:
 EOF
 
 echo "Browse to https://kind.test:8080/"
-kubectl port-forward -n kubernetes-dashboard service/dashboard-kubernetes-dashboard 8080:443 --address=0.0.0.0 &
+kubectl port-forward -n kubernetes-dashboard service/dashboard-kubernetes-dashboard 8080:443 --address=0.0.0.0 >> /dev/null &
 
 echo "Display the Token (copy and paste this into the Dashboard Web UI)"
 kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
