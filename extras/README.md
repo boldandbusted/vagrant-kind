@@ -11,6 +11,7 @@ Quality may vary, though there should be simple instructions output at the end o
 To run and access the Kubernetes Dashboard:
 
 ```shell
+vagrant up
 vagrant ssh
 
 # Inside the guest
@@ -24,13 +25,19 @@ cd /vagrant/extras/
 To run and access Apache Airflow:
 
 ```
-cd extras/
+vagrant up
+vagrant ssh
+
+# Inside the guest
+
+cd /vagrant/extras/
 . ./apache-airflow.sh
 ```
 
 ### Prometheus and Grafana stack
 
 ```shell
+vagrant up
 vagrant ssh
 
 # Inside the guest
