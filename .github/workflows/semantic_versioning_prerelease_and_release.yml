@@ -1,0 +1,52 @@
+---
+name: "Version Stamp Release"
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    if: github.event_name == 'push' && contains(toJson(github.event.commits),
+      '***NO_CI***') == false && contains(toJson(github.event.commits), '[ci
+      skip]') == false && contains(toJson(github.event.commits), '[skip ci]') ==
+      false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@f1d3225b5376a0791fdee5a0e8eac5289355e43a # pin@v2
+        with:
+          fetch-depth: 0
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@f1d3225b5376a0791fdee5a0e8eac5289355e43a # pin@v2
+        with:
+          fetch-depth: 0
+      - name: "Create release version string"
+        id: create_version
+        uses: paulhatch/semantic-version@ed818a75eb51eee5b4072b72a07031cd52a9f09f # pin@v4.0.1
+        with:
+          branch: "main"
+          tag_prefix: "v"
+          major_pattern: "(MAJOR)"
+          minor_pattern: "(MINOR)"
+          format: "${major}.${minor}.${patch}"
+          # change_path: "src/my-service"
+          short_tags: false
+          bump_each_commit: false
+      - name: "Apply tag"
+        id: apply_tag
+        uses: actions/create-release@0cb9c9b65d5d1901c1f53e5e66eaf4afd303e70e # pin@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.create_version.outputs.version }}
+          release_name: Release ${{ steps.create_version.outputs.version }}
+          body: |
+            ${{ steps.Changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
