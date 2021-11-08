@@ -9,13 +9,13 @@ Vagrant.configure(2) do |config|
     config.dns.tld = tld
   end
 
-  ["20.04"].each do |dist|
+  ["21.04"].each do |dist|
     config.vm.define "#{hostname}" do |node|
       node.vm.hostname = hostname
       node.vm.network "private_network", ip: '192.168.61.10'
 
       node.vm.provider :hyperv do |hv|
-        node.vm.box = 'bento/ubuntu-20.04'
+        node.vm.box = "bento/ubuntu-#{dist}"
         hv.memory = '8192'
         hv.cpus = '2'
         hv.vmname = hostname
