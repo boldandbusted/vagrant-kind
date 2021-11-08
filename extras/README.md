@@ -1,8 +1,8 @@
 # Extras
 
-Files in this directory could be used to create example deployments, demos, etc. All are meant to be run within the Vagrant VM.
+Files in this directory could be used to create example deployments, demos, local proof-of-concepts,etc. All are meant to be run within the Vagrant VM/Guest.
 
-Quality may vary.
+Quality may vary, though there should be simple instructions output at the end of the script runs. Please report any issues, and include the shell output in the Issue you report. New 'extras' are also welcome! Thanks!
 
 ## Examples
 
@@ -11,7 +11,11 @@ Quality may vary.
 To run and access the Kubernetes Dashboard:
 
 ```shell
-cd extras/
+vagrant ssh
+
+# Inside the guest
+
+cd /vagrant/extras/
 . ./k8s-dashboard.sh
 ```
 
@@ -22,6 +26,17 @@ To run and access Apache Airflow:
 ```
 cd extras/
 . ./apache-airflow.sh
+```
+
+### Prometheus and Grafana stack
+
+```shell
+vagrant ssh
+
+# Inside the guest
+
+cd /vagrant/extras/
+. ./fun_with_prometheus_grafana_and_k8s.sh
 ```
 
 ## TODO
