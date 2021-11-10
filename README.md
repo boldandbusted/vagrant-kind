@@ -32,12 +32,12 @@ git submodule update --init --remote
 ### Host OS access
 To expose K8s ports properly to the Host OS, be sure to add `--address 0.0.0.0` to relevant networking kubectl commands. Example:
 
-```
+```shel
 kubectl port-forward -n kubernetes-dashboard service/dashboard-kubernetes-dashboard 8080:443 --address=0.0.0.0 &
 ```
 
 ### FQDN to reach cluster
-`vagrant-dns` plugin users can use the hostname "kind.test" to reach ports exposed. Others will need to use the IP "192.168.34.10".
+`vagrant-dns` plugin users can use the hostname "kind.test" to reach ports exposed. Others will need to use the IP "192.168.61.10".
 
 # Ideas 
 Need ideas for what to do with this cluster? Check out KIND's [resources](https://kind.sigs.k8s.io/docs/user/resources/).
