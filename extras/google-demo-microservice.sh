@@ -7,5 +7,6 @@ cd microservices-demo
 kubectl create namespace demo
 kubectl -n demo apply -f ./release/kubernetes-manifests.yaml 
 kubectl wait --for=condition=available deployment/frontend -n demo
-kubectl port-forward deployment/frontend 9292:8080
-echo "Browse to http://kind.test:8080"
+#kubectl port-forward deployment/frontend 9292:8080
+kubectl -n demo port-forward svc/frontend 8081:80 --address 0.0.0.0 >> /dev/null &
+echo "Browse to http://kind.test:8081"
