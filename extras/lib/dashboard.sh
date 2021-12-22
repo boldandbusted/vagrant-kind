@@ -60,7 +60,8 @@ subjects:
   namespace: kubernetes-dashboard
 EOF
 
-echo "Browse to https://kind.test:8080/"
+my_ip=$(ip -j -p addr show eth1 | jq -r .[].addr_info[0].local)
+echo "Browse to https://kind.test:8080/ or https://$my_ip:8080/"
 kubectl port-forward -n kubernetes-dashboard service/dashboard-kubernetes-dashboard 8080:443 --address=0.0.0.0 >> /dev/null &
 
 echo "Display the Token (copy and paste this into the Dashboard Web UI)"
