@@ -3,8 +3,8 @@
 
 hostname = 'kind'
 tld = 'test'
-vm_ram = '16384'
-vm_cpus = '3'
+vm_ram = '8192'
+vm_cpus = '2'
 vm_disksize = '200GB'
 vm_host_ip = '192.168.61.10'
 
