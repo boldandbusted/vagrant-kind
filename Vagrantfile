@@ -3,6 +3,10 @@
 
 hostname = 'kind'
 tld = 'test'
+vm_ram = '16384'
+vm_cpus = '3'
+vm_disksize = '200GB'
+vm_host_ip = '192.168.61.10'
 
 Vagrant.configure(2) do |config|
   if Vagrant::Plugin::Manager.instance.plugin_installed?('vagrant-dns')
@@ -12,12 +16,12 @@ Vagrant.configure(2) do |config|
   ["21.04"].each do |dist|
     config.vm.define "#{hostname}" do |node|
       node.vm.hostname = hostname
-      node.vm.network "private_network", ip: '192.168.61.10'
+      node.vm.network "private_network", ip: vm_host_ip
 
       node.vm.provider :hyperv do |hv|
         node.vm.box = "bento/ubuntu-#{dist}"
-        hv.memory = '8192'
-        hv.cpus = '2'
+        hv.memory = vm_ram
+        hv.cpus = vm_cpus
         hv.vmname = hostname
         hv.vm_integration_services = {
           guest_service_interface: true,
@@ -26,7 +30,8 @@ Vagrant.configure(2) do |config|
       end
 
       node.vm.provider :virtualbox do |vb|
-        node.vm.box = "bento/ubuntu-#{dist}"
+        #node.vm.box = "bento/ubuntu-#{dist}"
+        node.vm.box = "ubuntu/hirsute64"
         if Vagrant::Plugin::Manager.instance.plugin_installed?('vagrant-dns')
           vb.customize [
             'modifyvm', :id,
@@ -36,14 +41,14 @@ Vagrant.configure(2) do |config|
           ]
         end
         # vb.gui = true
-        vb.memory = '8192'
-        vb.cpus = '2'
+        vb.memory = vm_ram
+        vb.cpus = vm_cpus
       end
 
       # SSH forwarding so that we can access Github as ourselves
       node.ssh.forward_agent = true
       node.vm.synced_folder ".", "/vagrant", type: "rsync"
-      node.disksize.size = "50GB"
+      node.disksize.size = vm_disksize
 
       node.vm.provision 'shell' do |shell|
         content = %(
@@ -55,6 +60,14 @@ Vagrant.configure(2) do |config|
         )
         shell.inline = content
         shell.reboot = true
+      end
+
+      node.vm.provision 'shell' do |shell|
+        content = %(
+        echo 'set -g default-terminal "tmux-256color"' >> ~/.tmux.conf
+        )
+        shell.inline = content
+        shell.privileged = false
       end
 
       node.vm.provision 'ansible_local' do |ansible|
