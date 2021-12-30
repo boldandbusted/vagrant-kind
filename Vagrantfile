@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
     config.dns.tld = tld
   end
 
-  ["21.04"].each do |dist|
+  ["21.10"].each do |dist|
     config.vm.define "#{hostname}" do |node|
       node.vm.hostname = hostname
       node.vm.network "private_network", ip: vm_host_ip
