@@ -1,6 +1,6 @@
 # Extras
 
-Files in this directory could be used to create example deployments, demos, local proof-of-concepts,etc. All are meant to be run within the Vagrant VM/Guest.
+Files in this directory could be used to create example deployments, demos, local proof-of-concepts,etc. All are meant to be run within the Vagrant VM/Guest, and you must change directory in the guest to `/vagrant/extras`.
 
 Quality may vary, though there should be simple instructions output at the end of the script runs. Please report any issues, and include the shell output in the Issue you report. New 'extras' are also welcome! Thanks!
 
